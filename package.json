@@ -1,0 +1,14 @@
+{
+  "name": "threejs.study",
+  "version": "1.0.0",
+  "description": "courses in threejs",
+  "main": "./src/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Luane",
+  "license": "ISC",
+  "dependencies": {
+    "three": "^0.156.1"
+  }
+}
