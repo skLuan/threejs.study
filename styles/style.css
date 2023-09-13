@@ -33,3 +33,11 @@ h1 {
   */
   background-color: skyblue;
 }
+
+.btn {
+  position: absolute;
+  top: 6%;
+  z-index: 5;
+  padding: 5px 2px;
+  border: 1px red solid;
+}
