@@ -7,8 +7,8 @@ function main() {
     const world = new World(container);
     btnRender.addEventListener('click', (e)=>{
         // console.log('sisa');
-        world.render();
     });
+    world.render();
 }
 
 main();
