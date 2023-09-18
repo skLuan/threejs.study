@@ -8,7 +8,8 @@ function main() {
     btnRender.addEventListener('click', (e)=>{
         // console.log('sisa');
     });
-    world.render();
+
+    world.start();
 }
 
 main();
