@@ -4,29 +4,20 @@ import {
   MeshStandardMaterial,
   BoxGeometry,
   MathUtils,
-} from "../../../node_modules/three/build/three.module.js";
+} from "/node_modules/three/build/three.module.js";
+import { createMaterial } from "./material.js";
 function gradosARadianes(grados) {
   return MathUtils.degToRad(grados);
 }
 const _mt = 1.5;
 
-function createCube() {
-  const _color = "cornsilk";
-  const material = new MeshStandardMaterial({ color: _color });
-  const geometry = new BoxGeometry(_mt, _mt, _mt);
-  const cube = new Mesh(geometry, material);
-
-
-  cube.tick = (delta) => {
-    const rotation = gradosARadianes(3.6);
-    cube.rotation.z += rotation * delta;
-    cube.rotation.x += rotation * delta;
-    cube.rotation.y += rotation * delta;
-  };
+function miniCube() {
   // -------- mini cube
   const geometryMini = new BoxGeometry(0.4, 0.4, 0.4);
   const materialMini = new MeshStandardMaterial({ color: "purple" });
+
   const miniCube = new Mesh(geometryMini, materialMini);
+
   miniCube.position.set(0, 2, 0);
   miniCube.rotation.set(gradosARadianes(30), 0, -1);
 
@@ -35,30 +26,42 @@ function createCube() {
     miniCube.rotation.z -= rotation * delta;
     miniCube.rotation.x -= rotation * delta;
     miniCube.rotation.y -= rotation * delta;
-    
-    // miniCube.position.x += 1*delta;
 
+    // miniCube.position.x += 1*delta;
   };
-  window.addEventListener('keydown', (e) => {
+  return miniCube;
+}
+
+
+
+function createCube(texture = "/assets/textures/uv-test-bw.png") {
+  const material = createMaterial(
+    "cornsilk",
+    texture
+  );
+  const geometry = new BoxGeometry(_mt, _mt, _mt);
+  const cube = new Mesh(geometry, material);
+
+  cube.tick = (delta) => {
+    const rotation = gradosARadianes(3.6);
+    cube.rotation.z += rotation * delta;
+    cube.rotation.x += rotation * delta;
+    cube.rotation.y += rotation * delta;
+  };
+  window.addEventListener("keydown", (e) => {
     switch (e.key) {
       case "l":
         break;
-    
+
       default:
         break;
     }
   });
 
   cube.rotation.set(gradosARadianes(45), gradosARadianes(45), 0);
-  cube.add(miniCube);
+  cube.add(miniCube());
   // cube.rotateZ(gradosARadianes(45));
   return cube;
-}
-
-
-
-function miniCube(cube) {
-  return cube.children[0];
 }
 
 function createBasicCube() {

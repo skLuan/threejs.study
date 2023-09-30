@@ -26,12 +26,14 @@ class World {
     container.append(renderer.domElement);
     loop = new Loop(camera, scene,renderer);
     const cube = new createCube();
-    const basicCube = new createBasicCube();
+    const basicCube = new createCube("/assets/textures/uv-test-col.png");
     const sphere = new createSphere();
     basicCube.position.set(1.5, 0, 0);
+    sphere.position.set(0,0,2)
+    basicCube.add(sphere);
     cube.position.set(-1.5, 0, 0);
 
-    loop.updatables.push(cube, miniCube(cube), camera);
+    loop.updatables.push(cube, cube.children[0], camera, basicCube);
     scene.add(cube, basicCube, pointLightOne);
     // scene.add(sphere);
 
