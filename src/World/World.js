@@ -7,6 +7,7 @@ import {
   createPointLight,
 } from "./components/lights.js";
 
+import { createControls } from "./systems/controls.js";
 import { createRenderer } from "./systems/renderer.js";
 import { Resizer } from "./systems/Resizer.js";
 import { Loop } from "./systems/Loop.js";
@@ -25,6 +26,7 @@ class World {
     const pointLightOne = createPointLight();
     container.append(renderer.domElement);
     loop = new Loop(camera, scene,renderer);
+    const controls = createControls(camera, renderer.domElement);
     const cube = new createCube();
     const basicCube = new createCube("/assets/textures/uv-test-col.png");
     const sphere = new createSphere();
@@ -33,7 +35,8 @@ class World {
     basicCube.add(sphere);
     cube.position.set(-1.5, 0, 0);
 
-    loop.updatables.push(cube, cube.children[0], camera, basicCube);
+    loop.updatables.push(controls);
+    // loop.updatables.push(cube, cube.children[0], camera, basicCube);
     scene.add(cube, basicCube, pointLightOne);
     // scene.add(sphere);
 
