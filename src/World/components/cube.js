@@ -5,7 +5,7 @@ import {
   BoxGeometry,
   MathUtils,
 } from "/node_modules/three/build/three.module.js";
-import { createMaterial } from "./material.js";
+import { createMaterial, loadTexture } from "./material.js";
 function gradosARadianes(grados) {
   return MathUtils.degToRad(grados);
 }
@@ -14,8 +14,11 @@ const _mt = 1.5;
 function miniCube() {
   // -------- mini cube
   const geometryMini = new BoxGeometry(0.4, 0.4, 0.4);
-  const materialMini = new MeshStandardMaterial({ color: "purple" });
-
+  const materialMini = createMaterial('pink');
+  const texture = loadTexture("/assets/textures/uv-test-bw.png");
+  materialMini.metalnessMap = texture;
+  materialMini.metalness = 0.5;
+console.log(texture);
   const miniCube = new Mesh(geometryMini, materialMini);
 
   miniCube.position.set(0, 2, 0);
