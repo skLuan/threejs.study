@@ -12,6 +12,7 @@
 <body>
     <h1>Discoverthreejs.com - Introducing the World App</h1>
     <button id="btn-render" class="btn">Renderizar!</button>
+    <button id="btn-cameraPos" class="btn">mover camara</button>
     <div id="scene-container">
         <!-- Our <canvas> will be inserted here -->
     </div>
