@@ -40,6 +40,7 @@ function createControls(camera, canvas) {
         isAnimating = false;
       }
     }
+    controls.update();
   };
   window.addEventListener("keypress", (e) => {
     switch (e.key) {

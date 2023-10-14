@@ -3,6 +3,7 @@ import { createCube, createBasicCube, miniCube } from "./components/cube.js";
 import { createSphere } from "./components/sphere.js";
 import { createScene } from "./components/scene.js";
 import {
+  createAmbientLight,
   createDirectionalLight,
   createPointLight,
 } from "./components/lights.js";
@@ -22,11 +23,20 @@ class World {
     camera = createCamera();
     scene = createScene();
     renderer = createRenderer();
-    light = createDirectionalLight();
-    const pointLightOne = createPointLight();
     container.append(renderer.domElement);
+    // -------------------------------- Lights    
+    light = createDirectionalLight(8);
+    light.position.set(0,5,1);
+    camera.add(light);
+
+    const {ambientLight, hemisphereLight } = createAmbientLight(8, 5);
+    const pointLightOne = createPointLight();
+    // -------------------------------- Loop Init    
     loop = new Loop(camera, scene,renderer);
+
+    // -------------------------------- Controls    
     const controls = createControls(camera, renderer.domElement);
+    // -------------------------------- Meshes    
     const cube = new createCube();
     const basicCube = new createCube("/assets/textures/uv-test-col.png");
     const sphere = new createSphere();
@@ -34,10 +44,8 @@ class World {
     sphere.position.set(0,0,2)
     basicCube.add(sphere);
     cube.position.set(-1.5, 0, 0);
-
     loop.updatables.push(controls);
-    // loop.updatables.push(cube, cube.children[0], camera, basicCube);
-    scene.add(cube, basicCube, pointLightOne);
+    scene.add(camera,cube, basicCube);
     // scene.add(sphere);
 
     const resizer = new Resizer(container, camera, renderer);
