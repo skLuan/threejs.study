@@ -18,7 +18,6 @@ function miniCube() {
   const texture = loadTexture("/assets/textures/uv-test-bw.png");
   materialMini.metalnessMap = texture;
   materialMini.metalness = 0.5;
-console.log(texture);
   const miniCube = new Mesh(geometryMini, materialMini);
 
   miniCube.position.set(0, 2, 0);

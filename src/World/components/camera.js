@@ -23,7 +23,7 @@ function createCamera() {
   window.addEventListener("keypress", (e) => {
     switch (e.key) {
       case "s" || "S":
-        console.log("sisaaa");
+        ("sisaaa");
         isGoing = !isGoing;
         isback? isback = false : '';
         break;

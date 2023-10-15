@@ -12,12 +12,14 @@ import { createControls } from "./systems/controls.js";
 import { createRenderer } from "./systems/renderer.js";
 import { Resizer } from "./systems/Resizer.js";
 import { Loop } from "./systems/Loop.js";
+import { createGroup, createMeshGroup } from "./components/meshGroup.js";
 
 let camera;
 let renderer;
 let scene;
 let light;
 let loop;
+let cubeGroup;
 class World {
   constructor(container) {
     camera = createCamera();
@@ -33,28 +35,46 @@ class World {
     const pointLightOne = createPointLight();
     // -------------------------------- Loop Init    
     loop = new Loop(camera, scene,renderer);
-
+    // ----------------------------------------------- Group
+    const groupCircles = createMeshGroup();
     // -------------------------------- Controls    
     const controls = createControls(camera, renderer.domElement);
     // -------------------------------- Meshes    
     const cube = new createCube();
     const basicCube = new createCube("/assets/textures/uv-test-col.png");
     const sphere = new createSphere();
+    cubeGroup = createGroup();
     basicCube.position.set(1.5, 0, 0);
     sphere.position.set(0,0,2)
     basicCube.add(sphere);
     cube.position.set(-1.5, 0, 0);
-    loop.updatables.push(controls);
-    scene.add(camera,cube, basicCube);
+    cubeGroup.add(cube, basicCube);
+
+    loop.updatables.push(controls, groupCircles, cubeGroup);
+    scene.add(camera, hemisphereLight, groupCircles, cubeGroup);
     // scene.add(sphere);
 
     const resizer = new Resizer(container, camera, renderer);
   }
 
+  keyBoardKeys() {
+      window.addEventListener("keypress", (e) => {
+        // console.log(e.key);
+        switch (e.key) {
+          case " ":
+            console.log("espacio");
+            cubeGroup.visible = !cubeGroup.visible;
+            break;
+          default:
+            break;
+        }
+      });
+  }
   render() {
     renderer.render(scene, camera);
   }
   start() {
+    this.keyBoardKeys();
     loop.start();
   }
   stop(){

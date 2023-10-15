@@ -45,7 +45,6 @@ function createControls(camera, canvas) {
   window.addEventListener("keypress", (e) => {
     switch (e.key) {
       case "u" || "U":
-        console.log("sisaaaa");
         controls.autoRotateSpeed += speed;
         break;
       case "j" || "J":
