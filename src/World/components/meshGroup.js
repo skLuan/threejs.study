@@ -51,6 +51,9 @@ function createMeshGroup() {
     group.add(clonedMesh);
     counter++;
   }
+    group.rotation.y += Math.PI /2;
+    group.position.x -= 5.8;
+    group.position.y += 1;
   return group;
 }
 

@@ -14,7 +14,7 @@ const _mt = 1.5;
 function miniCube() {
   // -------- mini cube
   const geometryMini = new BoxGeometry(0.4, 0.4, 0.4);
-  const materialMini = createMaterial('pink');
+  const materialMini = createMaterial("pink");
   const texture = loadTexture("/assets/textures/uv-test-bw.png");
   materialMini.metalnessMap = texture;
   materialMini.metalness = 0.5;
@@ -34,13 +34,11 @@ function miniCube() {
   return miniCube;
 }
 
-
-
-function createCube(texture = "/assets/textures/uv-test-bw.png") {
-  const material = createMaterial(
-    "cornsilk",
-    texture
-  );
+function createCube(
+  _color = "cornsilk",
+  texture = "/assets/textures/uv-test-bw.png"
+) {
+  const material = createMaterial(_color, texture);
   const geometry = new BoxGeometry(_mt, _mt, _mt);
   const cube = new Mesh(geometry, material);
 
@@ -65,6 +63,31 @@ function createCube(texture = "/assets/textures/uv-test-bw.png") {
   // cube.rotateZ(gradosARadianes(45));
   return cube;
 }
+function createDefaultCube(args = {}) {
+  args.color === null || args.color === undefined ? (args.color = "white") : "";
+  // args.texture === null || args.texture === undefined
+  //   ? (args.texture = "")
+  //   : "";
+  args.mt === null || args.mt === undefined ? (args.mt = _mt) : "";
+  args.width === null || args.width === undefined ? (args.width = _mt) : "";
+  args.height === null || args.height === undefined ? (args.height = _mt) : "";
+  args.depth === null || args.depth === undefined ? (args.depth = _mt) : "";
+
+  const material = createMaterial(args.color, args.texture);
+  const geometry = new BoxGeometry(args.width, args.height, args.depth);
+  const cube = new Mesh(geometry, material);
+
+  cube.tick = (delta) => {
+  };
+  window.addEventListener("keydown", (e) => {
+    switch (e.key) {
+      default:
+        break;
+    }
+  });
+  // cube.rotateZ(gradosARadianes(45));
+  return cube;
+}
 
 function createBasicCube() {
   const material = new MeshMatcapMaterial();
@@ -75,4 +98,4 @@ function createBasicCube() {
   return cube;
 }
 
-export { createCube, createBasicCube, miniCube };
+export { createCube, createBasicCube, miniCube, createDefaultCube };

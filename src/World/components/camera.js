@@ -7,7 +7,7 @@ function createCamera() {
     0.1, // near clipping plane
     100 // far clipping plane
   );
-  camera.position.set(0, 0, 10);
+  camera.position.set(10, 4, 2);
   let isGoing = true;
   let isback = false;
   camera.tick = (delta) => {
