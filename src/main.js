@@ -1,6 +1,6 @@
 import { World } from "./World/World.js";
 
-function main() {
+async function main() {
     const container = document.querySelector("#scene-container");
     const btnRender = document.querySelector('#btn-render');
 
@@ -9,7 +9,10 @@ function main() {
         // console.log('sisa');
     });
 
+    await world.init();
     world.start();
 }
 
-main();
+main().catch((err) => {
+    console.error(err);
+});

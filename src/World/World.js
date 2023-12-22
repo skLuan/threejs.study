@@ -16,6 +16,8 @@ import { Loop } from "./systems/Loop.js";
 import { createGroup, createMeshGroup } from "./components/meshGroup.js";
 import { Train } from "./components/Train/Train.js";
 
+import { loadBirds } from "./components/birds/birds.js";
+
 let camera;
 let renderer;
 let scene;
@@ -62,6 +64,10 @@ class World {
     // scene.add(sphere);
 
     const resizer = new Resizer(container, camera, renderer);
+  }
+
+  async init() {
+    await loadBirds();
   }
 
   keyBoardKeys() {
